@@ -1,0 +1,48 @@
+spring:
+  application:
+    name:
+      LoginTest
+
+  datasource:
+    url: jdbc:mariadb://${MARIA_HOST}:${MARIA_PORT}/${MARIA_DATABASE}
+    username: ${MARIA_USER}
+    password: ${MARIA_PASSWORD}
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+    properties:
+      hibernate:
+        show_sql: true # S6py 에서는 필요없음
+        format_sql: true
+        dialect: org.hibernate.dialect.MariaDBDialect
+
+
+  session:
+    store-type: redis
+    redis:
+      namespace: test:session
+
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      password: ${REDIS_PASSWORD}
+      port: ${REDIS_PORT}
+
+server:
+  servlet:
+    session:
+      cookie:
+        name: JSESSIONID
+
+
+oauth:
+  kakao:
+    client-id: ${OAUTH_KAKAO_CLIENT_ID}
+    url:
+      auth-url: ${OAUTH_KAKAO_AUTH_URL}
+      api-url: ${OAUTH_KAKAO_API_URL}
+      redirect-url: ${OAUTH_KAKAO_REDIRECT_URL}
+      logout-redirect-url: ${OAUTH_KAKAO_LOGOUT_REDIRECT_URI}
